@@ -1,6 +1,9 @@
 package main.java.samples;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +27,16 @@ public class ReadWriteGson {
 		cars.add(audiA4);
 		String jsonElement = gson.toJson(cars);
 		writeToJson(filename, jsonElement);
+		
+		System.out.println("ArrayList of Car objects to json");
 		System.out.println(jsonElement);
+		
+		try {
+			readFromJson(filename);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static void writeToJson(String filename, String string) {
@@ -36,6 +48,17 @@ public class ReadWriteGson {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	private static void readFromJson(String filename) throws FileNotFoundException {
+		Gson gson = new Gson();
+		BufferedReader br = new BufferedReader(new FileReader("cars.json"));
+		
+		Car[] list = gson.fromJson(br, Car[].class);
+		System.out.println("read json file into list of CAR objects");
+		for (Car car: list) {
+			System.out.println(car);
 		}
 	}
 
