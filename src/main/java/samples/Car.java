@@ -35,5 +35,12 @@ public class Car {
 		this.year = year;
 	}
 	
-
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Make: " + make);
+		sb.append(", Model: " + model);
+		sb.append(", Year: " + year);
+		return sb.toString();
+	}
 }
